@@ -20,9 +20,7 @@ $dataCate = $stmt->fetchAll();
 <div id="header">
 	<div class="container">
 		<div class="col-md-2 col-xs-12 col-sm-4">
-			<a href="index.php">
-				<img src="<?= $siteUrl . $data['logo'] ?>" alt="logo" >
-			</a>
+			<a href="index.php"><img src="<?= $siteUrl . $data['logo'] ?>" alt="logo" ></a>
 		</div>
 		<div class="col-md-10 col-xs-12 col-sm-8">
 			<div class="header-time col-md-12 col-xs-12 col-sm-12">
