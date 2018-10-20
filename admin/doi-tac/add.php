@@ -40,7 +40,7 @@ checkLogin(USER_ROLES['moderator']);
     <!-- Main content -->
     <section class="content">
       <div class="row">
-      <form enctype="multipart/form-data" method="post" action="<?= $adminUrl ?>doi-tac/save-add.php" >
+      <form enctype="multipart/form-data" method="post" action="<?= $adminUrl ?>doi-tac/save-add.php" id="vali">
          <div class="col-md-9">
              <div class="row">
               <div class="col-md-6 col-md-offset-3">
@@ -48,13 +48,13 @@ checkLogin(USER_ROLES['moderator']);
               </div>
             </div>
             <div class="form-group">
-              <label>Ảnh đối tác</label>
+              <b>Ảnh đối tác</b>
               <input type="file" id="brand_image" name="image" class="form-control">
             </div>
           </div>
         <div class="col-md-9" center>
              <div class="form-group">
-              <label>Tên Đối Tác</label>
+              <b>Tên Đối Tác</b>
               <input type="text" name="name" class="form-control" required>
             </div>
             <div class="text-center">
@@ -65,7 +65,12 @@ checkLogin(USER_ROLES['moderator']);
         </div>
       </div>
     </section>
+    <style type="text/css">
+      label{
+          height: auto; background: #FFCCCC; color: black; border: 1px red solid; width: auto; margin-top: 10px;
 
+          }
+    </style>
     <!-- /.content -->
   </div>
       <?php include_once $path.'_share/footer.php'; ?>
@@ -100,4 +105,25 @@ checkLogin(USER_ROLES['moderator']);
   }
 </script>
 </body>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script>
+  $("#vali").validate({
+            rules: {
+                name: "required",
+                image: {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+                name: "Vui lòng nhập tên",
+ 
+                image: {
+                    required: "Vui lòng chọn ảnh",
+
+                }
+            }
+        });
+</script>
 </html>

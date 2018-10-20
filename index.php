@@ -2,12 +2,6 @@
 // // tao ket noi den csdl
 require_once './commons/utils.php';
 
-// echo "<pre>";
-// var_dump($dataCate);
-// 
-// var_dump($dataSlides);
-// lay du lieu tu csdl bang products cho sp moi
-
 $pageNumber = isset($_GET['page']) == true ? $_GET['page'] : 1;
 $pageSize = 5;
 $offset = ($pageNumber-1)*$pageSize;
@@ -73,17 +67,9 @@ $newBrands = $stmt->fetchAll();
 				<div class="col-sm-4 col-xs-12">
 					<div class="img-height">
 						<a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>"><img src="<?= $siteUrl . $np['image']?>" alt=""></a>
-						<div class="footer-product">
-							
-							<!-- <a href="gh.php?id=<?=$np['id']?>" class="buying" name="btn_add">Mua hàng</a> -->
-							<form action="gh.php?id=<?=$np['id']?>" method="post">
-								<a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>" class="details" >Xem chi tiết</a>
-							<input type="submit" name="btn_add" value="Giỏ hàng" class="details" style="cursor: pointer;border: 1px solid red; padding: 10px;color: #000;">
-							<input type="hidden" name="id_pd" value="<?php echo $np['id']?>">
-							<input type="hidden" name="img_pd" value="<?php echo $np['image']?>">
-           					<input type="hidden" name="name_pd" value="<?php echo $np['product_name']?>">
-           					<input type="hidden" name="price_pd" value="<?php echo $np['sell_price']?>">			
-							</form>		
+						<div class="footer-product">							
+							<a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>" class="details"" class="details">Xem chi tiết</a>
+							<a href="addcart.php?id=<?=$np['id']?>" class="buying">Mua hàng</a>
 						</div>
 					</div>
 					<div id="namesp">
@@ -120,7 +106,7 @@ $newBrands = $stmt->fetchAll();
 						<a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>"><img src="<?= $siteUrl . $np['image']?>" alt=""></a>
 						<div class="footer-product">							
 							<a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>" class="details"" class="details">Xem chi tiết</a>
-							<a href="gh.php?id=<?=$np['id']?>" class="buying">Mua hàng</a>
+							<a href="addcart.php?id=<?=$np['id']?>" class="buying">Mua hàng</a>
 						</div>
 					</div>
 					<a class="title-name"><?= $np['product_name']?></a>
@@ -147,7 +133,7 @@ $newBrands = $stmt->fetchAll();
 			</div>
 			<?php foreach ($newBrands as $dt ): ?>
 				<div class="partner-img col-md-3 col-xs-6">
-					<a href="https://www.google.com.vn"><img src="<?= $siteUrl . $dt['image']?>" alt=""></a>
+					<img src="<?= $siteUrl . $dt['image']?>" alt="">
 				</div>
 			<?php endforeach ?>
 		</div>

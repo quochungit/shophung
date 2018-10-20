@@ -7,18 +7,19 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
 	die;
 }
 $tt = $_POST['tt'];
-$order_number = $_POST['order_number'];
+$status = $_POST['status'];
 $img = $_FILES['image'];
 $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
 $filename = 'img/slideshow/'.uniqid() . '.' . $ext;
 move_uploaded_file($img['tmp_name'], '../../'.$filename);
 
-$sql= "insert into slideshows (image, tt, order_number)
+$sql= "insert into slideshows (image, tt, status)
 		values 
-		(:image, :tt, :order_number)";
+		(:image, :tt, :status)";
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(":image", $filename);
 $stmt->bindParam(":tt", $tt);
+$stmt->bindParam(":status", $status);
 $stmt->execute();
 header('location: ' . $adminUrl . 'slide-show?success=true');
  ?>

@@ -52,13 +52,13 @@ $cates = $stmt->fetchAll();
     <section class="content">
       <div class="row">
         <div class="col-md-6" center>
-          <form action="<?= $adminUrl ?>danh-muc/save-add.php" method="post">
+          <form action="<?= $adminUrl ?>danh-muc/save-add.php" method="post" id="vali">
             <div class="form-group">
-              <label>Tên danh mục</label>
+              <b>Tên danh mục</b>
               <input type="text" name="name" class="form-control" required>
             </div>
             <div class="form-group">
-              <label>Mô tả</label>
+              <b>Mô tả</b>
               <textarea class="form-control" name="desc" rows="5"></textarea>
             </div>
             <div class="text-center">
@@ -79,4 +79,31 @@ $cates = $stmt->fetchAll();
 <?php include_once $path.'_share/bottom_asset.php'; ?>  
 
 </body>
+<style type="text/css">
+  label{
+          height: auto; background: #FFCCCC; color: black; border: 1px red solid; width: auto; margin-top: 10px;
+
+          }
+</style>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script>
+  $("#vali").validate({
+            rules: {
+                name: "required",
+                desc: {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+                name: "Vui lòng nhập tên thư mục",
+ 
+                desc: {
+                    required: "Vui lòng nhập ...",
+                    minlength: "Nội dung ngắn vậy?"
+                }
+            }
+        });
+</script>
 </html>

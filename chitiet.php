@@ -25,7 +25,11 @@ $stmt = $conn->prepare($newBrandsQuery);
 $stmt->execute();
 
 $newBrands = $stmt->fetchAll();
-?><head>
+$updateView = "update products set views = views +1 where id = '$id'";
+$stmt = $conn->prepare($updateView);
+$stmt->execute();
+?>
+<head>
 	<?php 
 	include './_share/client_assets.php';
 	 ?>
@@ -37,11 +41,11 @@ $newBrands = $stmt->fetchAll();
 #tt{
 		overflow: scroll;
     	height: auto;
-    	height: 400px;
+    	height: 250px;
 		}	
 #cm{
     overflow: scroll;
-    height: 270px;
+    max-height: 210px;
     margin-top: 45px; 
     margin-bottom: 50px;
     border: #ccc 1px solid;
@@ -53,6 +57,12 @@ a{
 .link i{
 	margin-left: 10px;
 }
+.anh img{
+	width:90%;
+}
+label{
+	height: auto; background: #FFCCCC; color: black; border: 1px red solid; width: auto; margin-top: 10px;
+	}
 </style>
 <body>
 	<?php 
@@ -63,10 +73,10 @@ a{
 			<div class="tittle-product">
 				<center><h1>Thông tin sản phẩm</h1></center>
 				<?php foreach ($newProducts as $tt ): ?>
-					<div class="col-md-7 left" style="margin-top: 12px;">
-						<img src="<?= $tt['image'] ?>">
+					<div class="col-md-6 left" style="margin-top: 12px;">
+						<div class="anh"><center><img src="<?= $tt['image'] ?>"></center></div>
 					</div>
-					<div class="col-md-5 right" style="border: 2px solid yellow; margin-top: 10px; border-radius:10px; color: #000">
+					<div class="col-md-6 right" style="border: 2px solid yellow; margin-top: 10px; border-radius:10px; color: #000">
 						<div>
 							<p style="font-size: 35; color: red; font-style: italic;"><?= $tt['product_name'] ?></p>	
 						</div>
@@ -94,13 +104,8 @@ a{
 						</div><br>
 						<div>
 							
-							<form action="chitiet.php?id=<?=$np['id']?>" method="post">
-								<button style="background: #FF3333;width: 300px; height: 50px; font-size: 30px;" name="btn_add"><a href="gh.php?id=<?=$tt['id']?>">Thêm Vào Giỏ Hàng</a></button>
-							<input type="submit" name="btn_add" value="Giỏ hàng" class="details">
-							<input type="hidden" name="id_pd" value="<?php echo $np['id']?>">
-							<input type="hidden" name="img_pd" value="<?php echo $np['image']?>">
-           					<input type="hidden" name="name_pd" value="<?php echo $np['product_name']?>">
-           					<input type="hidden" name="price_pd" value="<?php echo $np['sell_price']?>">			
+							<form action="chitiet.php?id=<?=$np['id']?>" method="post" >
+								<button style="background: #FF3333;width: 300px; height: 50px; font-size: 30px;" name="btn_add"><a href="addcart.php?id=<?=$tt['id']?>">Thêm Vào Giỏ Hàng</a></button>		
 							</form>			
 						</div>
 						<div id="dm" style="margin-top: 40px; margin-bottom: 20px;">
@@ -121,14 +126,14 @@ a{
 			<div class="row">
 				<div class="col-md-6">
 					<h2 style="margin-left: 30px;">Phản hồi</h2>
-					<form action="submit_comment.php" method="post">
+					<form action="submit_comment.php" method="post" id="vali">
 						<input type="hidden" name="id" value="<?= $id?>">
 						<div class="form-group">
-							<label style="color: #000">Email</label>
-							<input type="text" name="email" class="form-control" required>
+							<b style="color: #000">Email</b>
+							<input type="email" name="email" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<label style="color: #000"3>Nội dung</label>
+							<b style="color: #000"3>Nội dung</b>
 							<textarea class="form-control" rows="5" name="content" required></textarea>
 						</div>
 						<div class="text-center">
@@ -150,6 +155,12 @@ a{
 			</div>
 		</div>
 	</div>
+	<div>
+		<center><h1>Các sản phẩm liên quan</h1></center><hr>
+		<div>
+			
+		</div>
+	</div>
 	<div id="partner">
 		<div class="container">
 			<h2 class="title-product">Các đối tác</h2>
@@ -164,5 +175,29 @@ a{
 	include './_share/footer.php';
 	 ?>
 </body>
-
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script>
+	$("#vali").validate({
+            rules: {
+                email: {
+                    required: true,
+                },
+                content: {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+                email:{
+                    required: "Vui lòng nhập email",
+                   	minlength: "Vui lòng nhập đúng định dạng email",
+                },	
+                content: {
+                    required: "Vui lòng nhập nội dung",
+                    minlength: "Nội dung quá ngắn"
+                }
+            }
+        });
+</script>
 </html>

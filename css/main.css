@@ -167,7 +167,7 @@ img{
     transition: 0.5s ease-in;
 }
 label{
-    color: #fff;
+    color: red;
     margin-top: 20px;
 }
 #footer{

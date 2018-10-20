@@ -172,11 +172,6 @@ require_once $path.'../commons/utils.php';
               <i class="fa fa-file-image-o"></i> Slide shows
             </a>
           </li>
-          <li class="">
-            <a href="<?= $adminUrl?>doi-tac" class="small-box-footer">
-              <i class="fa fa-amazon"></i> Hãng liên kết
-            </a>
-          </li>
         </ul>
       </li>
     </ul>

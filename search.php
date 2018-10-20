@@ -51,16 +51,8 @@ include './_share/client_assets.php';
           <div class="img-height">
             <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>"><img src="<?= $siteUrl . $np['image']?>" alt=""></a>
             <div class="footer-product">
-              
-              <!-- <a href="gh.php?id=<?=$np['id']?>" class="buying" name="btn_add">Mua hàng</a> -->
-              <form action="gh.php?id=<?=$np['id']?>" method="post">
-                <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>" class="details" >Xem chi tiết</a>
-              <input type="submit" name="btn_add" value="Giỏ hàng" class="details" style="cursor: pointer;border: 1px solid red; padding: 10px;color: #000;">
-              <input type="hidden" name="id_pd" value="<?php echo $np['id']?>">
-              <input type="hidden" name="img_pd" value="<?php echo $np['image']?>">
-                    <input type="hidden" name="name_pd" value="<?php echo $np['product_name']?>">
-                    <input type="hidden" name="price_pd" value="<?php echo $np['sell_price']?>">      
-              </form>   
+              <a href="addcart.php?id=<?=$np['id']?>" class="buying" name="btn_add">Mua hàng</a>
+              <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>" class="details" >Xem chi tiết</a>  
             </div>
           </div>
           <div id="namesp">

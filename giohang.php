@@ -1,15 +1,7 @@
 <?php 
  session_start();
 require_once './commons/utils.php';
-$newProductsQuery = "	select * 
-						from ".TABLE_PRODUCT." 
-						";
-$stmt = $conn->prepare($newProductsQuery);
-$stmt->execute();
-
-$newProducts = $stmt->fetchAll();
-// lay du lieu tu csdl bang doi tac
-$newBrandsQuery = "	select * 
+ $newBrandsQuery = "	select * 
 						from ".TABLE_BRANDS." 
 						order by id desc limit 4
 						";
@@ -18,17 +10,7 @@ $stmt->execute();
 
 $newBrands = $stmt->fetchAll();
 
-if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart']= [];
-    }
-
-    if (isset($_POST['btn_add'])) {
-		$id_product = $_POST['id_pd'];
-        $img_product = $_POST['img_pd'];
-        $name_product = $_POST['name_pd'];
-        $price_product = $_POST['price_pd'];
-        $_SESSION['cart'][$id_product]=['nameproduct' => $name_product, 'priceproduct'=> $price_product, 'imgproduct'=>$img_product];
-    }
+var_dump($_SESSION['cart']);
 ?>
  <head>
 	<?php 
@@ -42,39 +24,45 @@ if (!isset($_SESSION['cart'])) {
 	<?php 
 	include './_share/header.php';
 	 ?>
-	<div class="container">
+	<div class="container" style="background: #FFFFCC	">
 		<div class="col-md-12"><center><h2>Giỏ hàng của bạn</h2></center></div>
-		<div class="col-md-8">
-			<table class="table table-bordered bo" style="margin-top: 25px;">
+		<div class="col-md-9">
+			<table class="table table-hover" style="margin-top: 25px;">
 				<tr>
-					<th width="150px">Tên sản phẩm</th>
-					<th width="150px">Ảnh sản phẩm</th>
-					<th width="100px">Giá</th>
-					<th width="100px"></th>
+					<th>STT</th>
+					<th>Tên sản phẩm</th>
+					<th>Ảnh sản phẩm</th>
+					<th>Giá</th>
+					<th></th>
 				</tr>
-				<tr>
-					<td>â</td>
-					<td>a</td>
-					<td>a</td>
-					<td>Xóa</td>
-					</form>
-				</tr>
+				<tbody>
+					
+				</tbody>
+				<?php $stt=1; foreach ($_SESSION['cart'] as $key => $item): ?>
+					<tr>
+						<td><?php echo $stt; ?></td>
+						<td><?php $item['product_name'] ?></td>
+						<td>
+						</td>
+						<td><?php $item['sell_price'] ?></td>
+						<td></td>
+					</tr>
+				<?php $stt ++; endforeach ?>
 			</table>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3" style="float: right;">
 			<center><h3>THÔNG TIN KHÁCH HÀNG</h3></center><br>
-			<form method="POST" action="giohang.php">
-				
+			<form method="POST" action="giohang.php" id="vali">
 				<b>Tên khách hàng</b> 
-				<input class="form-control" type="text" name="tenkh"><br>
+				<input class="form-control" type="text" name="tenkh" required><br>
 				<b>Email</b> 
-				<input  class="form-control" type="text" name="emailkh"><br>
+				<input  class="form-control" type="text" name="emailkh" required><br>
 				<b>Số điện thoại</b> 
-				<input class="form-control" type="text" name="sdtkh"><br>
+				<input class="form-control" type="text" name="sdtkh" required><br>
 				<b>Địa chỉ nhận hàng</b> 
-				<textarea class="form-control" rows="5" name="diachikh"></textarea><br>
+				<textarea class="form-control" rows="5" name="diachikh" required></textarea><br>
 				<b>Ghi chú</b> 
-				<textarea class="form-control" rows="5" name="ghichu"></textarea><br>
+				<textarea class="form-control" rows="5" name="ghichu" required></textarea><br>
 				<input  type="submit" name="btn_gui" value="THANH TOÁN">
 			</form>
 		</div>

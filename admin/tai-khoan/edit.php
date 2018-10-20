@@ -5,8 +5,8 @@ session_start();
 $path = "../";
 require_once $path.$path."commons/utils.php";
 checkLogin(USER_ROLES['admin']);
-$userId = $_GET['id'];
-$sql = "select * from " . TABLE_USERS . " where id = $userId";
+$id = $_GET['id'];
+$sql = "select * from " . TABLE_USERS . " where id = $id";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $user = $stmt->fetch();
@@ -49,15 +49,37 @@ if(!$user){
     <section class="content">
       <div class="row">
         <form action="<?= $adminUrl?>/tai-khoan/save-edit.php" method="post" >
-          <input type="hidden" name="userid" value="<?=$userId?>">
           <div class="col-md-6">
+            <input type="hidden" name="id" value="<?= $id ?>">
             <div class="form-group">
               <label>Email</label>
-              <input type="text" name="email" class="form-control" value="<?= $user['email']?>" required>
+              <!-- /.error -->
+              <?php 
+              if(isset($_GET['msg1']) && $_GET['msg1'] != ""){
+               ?>
+               <div class="form-group"  style="height: 25px; border: 1px solid red; background: #FFCCCC"> | <?= $_GET['msg1'] ?></div>
+              <?php } 
+              ?>
+              <input type="text" name="email" class="form-control" value="<?= $user['email'] ?>">
             </div>
             <div class="form-group">
               <label>Tên đầy đủ</label>
-              <input type="text" name="fullname" class="form-control" value="<?= $user['fullname']?>" required>
+              <input type="text" name="fullname" class="form-control" value="<?= $user['fullname'] ?>">
+            </div>
+            <div class="form-group">
+              <label>Mật khẩu mới</label>
+              <input type="password" name="password" class="form-control">
+            </div>
+            <!-- /.error -->
+              <?php 
+              if(isset($_GET['msg']) && $_GET['msg'] != ""){
+               ?>
+               <div class="form-group" style="height: 30px; border: 1px solid red; background: #FFCCCC"><?= $_GET['msg'] ?></div>
+              <?php } 
+              ?>
+            <div class="form-group">
+              <label>Xác nhận mật khẩu mới</label>
+              <input type="password" name="cfPassword" class="form-control">
             </div>
             <div class="form-group">
               <label>Quyền</label>
@@ -67,17 +89,12 @@ if(!$user){
                 <?php endforeach ?>
               </select>
             </div>
-            <div class="form-group">
-              <label>Số điện thoại</label>
-              <input type="text" name="phone_number" class="form-control" required value="<?= $user['phone_number']?>">
-            </div>
             <div class="col-md-12 text-right">
-              <a href="<?= $adminUrl?>tai-khoan" class="btn btn-xs btn-danger">Huỷ</a>
-              <button type="submit" class="btn btn-xs btn-primary">Lưu</button>
+              <a href="<?= $adminUrl?>tai-khoan" class="btn  btn-danger">Huỷ</a>
+              <button type="submit" class="btn  btn-primary">Lưu</button>
             </div>
           </div>
         </form>
-
       </div>
     </section>
     <!-- /.content -->
@@ -90,6 +107,29 @@ if(!$user){
 <!-- ./wrapper -->
 <?php include_once $path.'_share/bottom_asset.php'; ?>  
 
-
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#editor').wysihtml5();
+  });
+  function getBase64(file, selector) {
+     var reader = new FileReader();
+     reader.readAsDataURL(file);
+     reader.onload = function () {
+      $(selector).attr('src', reader.result);
+     };
+     reader.onerror = function (error) {
+       console.log('Error: ', error);
+     };
+  }
+  var img = document.querySelector('#product_image');
+  img.onchange = function(){
+    var file = this.files[0];
+    if(file == undefined){
+      $('#imageTarget').attr('src', "<?= $siteUrl ?>img/default/default-picture.jpg");
+    }else{
+      getBase64(file, '#imageTarget');
+    }
+  }
+</script>
 </body>
 </html>

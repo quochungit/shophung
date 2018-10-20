@@ -30,6 +30,9 @@ require_once './commons/utils.php';
 		</div>
 	</form>
 </body>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+
 </html>
 <style type="text/css">
 	* {

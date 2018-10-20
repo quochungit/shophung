@@ -27,10 +27,10 @@ $newBrands = $stmt->fetchAll();
 	<div class="container">
 		<div class="col-md-6 left">
 			<h2 class="title-product">Liện hệ với chúng tôi</h2>
-			<form action="submit_contact.php" method="post">
+			<form action="submit_contact.php" method="post" id="vali">
 				<div>
 					<b>Tên khách hàng</b>
-					<input type="text" class="form-control" name="name" required>
+					<input  type="text" class="form-control" name="name" required>
 				</div>
 				<div>
 					<b>Email</b>
@@ -50,6 +50,10 @@ $newBrands = $stmt->fetchAll();
 			</form>
 			<style type="text/css">
 				button a{color:#C0c }
+				label{
+					height: auto; background: #FFCCCC; color: black; border: 1px red solid; width: auto; margin-top: 10px;
+
+					}
 			</style>
 		</div>
 		<div class="col-md-6 right">
@@ -74,4 +78,40 @@ $newBrands = $stmt->fetchAll();
     include './_share/footer.php';
      ?>
 </body>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script>
+	$("#vali").validate({
+            rules: {
+            	phone:{
+                    required: true,
+                    minlength: 10
+                },
+                name: "required",
+                email: {
+                    required: true,
+                    minlength: 1
+                },
+                nd: {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+            	phone: {
+                            required: "Vui lòng nhập số điện thoại",
+                            minlength: "Mời nhập SĐT, ít nhất 10 chữ số"
+                        },
+                name: "Vui lòng nhập tên",
+                email:{
+                    required: "Vui lòng nhập email",
+                   
+                },	
+                nd: {
+                    required: "Vui lòng nhập nội dung",
+                    minlength: "Nội dung ngắn vậy?"
+                }
+            }
+        });
+</script>
 </html>

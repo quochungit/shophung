@@ -55,7 +55,7 @@ $SlideShow = $stmt->fetchAll();
                     <th style="width: 10px">ID</th>
                     <th>Ảnh SlideShow</th>
                     <th style="width: 90px">Thông tin</th>
-                    <th style="width: 90px">STT</th>
+                    <th style="width: 90px">Trạng thái</th>
                     <th>
                       <a href="<?= $adminUrl?>slide-show/add.php"
                         class="btn btn-xs btn-success"
@@ -70,9 +70,9 @@ $SlideShow = $stmt->fetchAll();
                       <td><?= $c['id']?></td>
                       <td class="img"><img src="<?= $siteUrl.$c['image'] ?>"></td>
                       <td><?= $c['tt']?></td>
-                      <td><?= $c['order_number']?></td>
+                      <td><?= $c['status']?></td>
                       <td>
-                        <a href="<?= $adminUrl ?>slideshow/edit.php?id=<?= $c['id'] ?>" 
+                        <a href="<?= $adminUrl ?>slide-show/edit.php?id=<?= $c['id'] ?>" 
                   class="btn btn-xs btn-primary btn-info">Sửa</a>
                         <a href="javascript:;"
                           linkurl="<?= $adminUrl?>slide-show/remove.php?id=<?= $c['id']?>"

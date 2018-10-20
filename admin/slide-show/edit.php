@@ -1,17 +1,21 @@
 <?php 
-session_start();
+// hien thi danh sach danh muc cua he thong
 $path = "../";
 require_once $path.$path."commons/utils.php";
-checkLogin(USER_ROLES['moderator']);
+session_start();
 // dem ton so record trong bang danh muc
-
+$id = $_GET['id'];
+$sql = "select * from slideshows where id='$id'";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$slideshows = $stmt->fetch();
  ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ShopHung| Quản lí lideShow</title>
+  <title>Shop Hung | Sửa thông tin SlideShow</title>
 
   <?php include_once $path.'_share/top_asset.php'; ?>
 
@@ -29,55 +33,62 @@ checkLogin(USER_ROLES['moderator']);
     <section class="content-header">
       <h1>
         Dashboard
-        <small>Quản lí lideShow</small>
+        <small>Sửa thông tin SlideShow</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?= $adminUrl ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Quản lí SlideShow</li>
+        <li><a href="<?= $adminUrl?>"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Sửa thông tin SlideShow</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-12" center>
-          <form enctype="multipart/form-data" action="<?= $adminUrl ?>slide-show/save-add.php" method="post" >
-             <div class="row">
-              <div class="col-md-6 col-md-offset-3">
-                <img id="imageTarget" src="<?= $siteUrl?>img/default/default.png" class="img-responsive" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Ảnh</label>
-              <input type="file" id="product_image" name="image" class="form-control">
-            </div>
-            <div class="form-group">
+        <form enctype="multipart/form-data" action="<?= $adminUrl?>slide-show/save-edit.php" method="post">
+          <input type="hidden" value="<?= $slideshows['id']?>" name="id">
+          <input type="hidden" name="old_filename" value="<?= $slideshows['image']?>">
+          <div class="col-md-6">
+             <div class="form-group">
               <label>Thông tin</label>
-              <input class="form-control" name="tt" required></input>
+              <input type="text" name="tt" class="form-control" value="<?= $slideshows['tt']?>">
             </div>
             <div class="form-group">
-               <label>Status</label>
+              <label>Trạng thái</label>
                   <select name="status">
                     <option value="1">Hiển thị</option>
                       <option value="0">Ẩn</option>
                   </select>
+               
             </div>
-            <div class="text-center">
-              <a href="<?= $adminUrl?>slide-show" class="btn btn-danger btn-xs">Huỷ</a>
-              <button type="submit" class="btn btn-primary btn-xs" value="upload">Tạo mới</button>
+            
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12 col-md-offset-0">
+                <img id="imageTarget" src="<?= $siteUrl?>/<?= $slideshows['image'] ?>" class="img-responsive" >
+              </div>
             </div>
-          </form>
-        </div>
+            <div class="form-group">
+              <label>Ảnh</label>
+              <input type="file" id="product_image" name="image" class="form-control" style="max-width: 640px;">
+            </div>
+          </div>
+          
+          <div class="col-md-6 text-right">
+            <a href="<?= $adminUrl?>slide-show" class="btn btn-danger">Huỷ</a>
+            <button type="submit" class="btn  btn-primary">Lưu</button>
+          </div>
+        </form>
       </div>
     </section>
     <!-- /.content -->
   </div>
+  <?php include_once $path.'_share/footer.php'; ?>  
   <!-- /.content-wrapper -->
   <?php include_once $path.'_share/sidebar.php'; ?>  
-<?php include_once $path.'_share/footer.php'; ?>
 </div>
 <!-- ./wrapper -->
-<?php include_once $path.'_share/bottom_asset.php'; ?>  
+<?php include_once $path.'_share/bottom_asset.php'; ?> 
 <script type="text/javascript">
   $(document).ready(function(){
     $('#editor').wysihtml5();
@@ -96,11 +107,12 @@ checkLogin(USER_ROLES['moderator']);
   img.onchange = function(){
     var file = this.files[0];
     if(file == undefined){
-      $('#imageTarget').attr('src', "<?= $siteUrl ?>img/default/default.png");
+      $('#imageTarget').attr('src', "<?= $siteUrl ?>$slideshow['image']");
     }else{
       getBase64(file, '#imageTarget');
     }
   }
 </script>
+
 </body>
 </html>
