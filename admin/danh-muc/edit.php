@@ -1,9 +1,9 @@
 <?php 
-// hien thi danh sach danh muc cua he thong
 session_start();
+// hien thi danh sach danh muc cua he thong
 $path = "../";
 require_once $path.$path."commons/utils.php";
-checkLogin(USER_ROLES['moderator']);
+checkLogin();
 $cateId = $_GET['id'];
 $sql = "select * from " . TABLE_CATEGORY . " where id = $cateId";
 $stmt = $conn->prepare($sql);
@@ -18,7 +18,7 @@ if(!$cate){
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ShopHung| Sửa danh mục</title>
+  <title>AdminLTE 2 | Sửa danh mục</title>
 
   <?php include_once $path.'_share/top_asset.php'; ?>
 
@@ -36,31 +36,31 @@ if(!$cate){
     <section class="content-header">
       <h1>
         Dashboard
-        <small>Control panel</small>
+        <small>Sửa danh mục</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?= $adminUrl ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Sửa danh mục</li>
+        <li><a href="<?= $adminUrl?>"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Danh mục</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-       <div class="row">
+      <div class="row">
         <div class="col-md-6">
           <form action="<?= $adminUrl ?>danh-muc/save-edit.php" method="post">
             <input type="hidden" name="id" value="<?= $cate['id']?>">
             <div class="form-group">
-              <label>Tên danh mục</label>
+              <b>Tên danh mục</b>
               <input type="text" name="name" class="form-control" value="<?= $cate['name']?>">
               <?php 
               if(isset($_GET['errName']) && $_GET['errName'] != ""){
                ?>
-               <span class="text-danger"><?= $_GET['errName'] ?></span>
+               <label class="text-danger"><?= $_GET['errName'] ?></label>
               <?php } ?>
             </div>
             <div class="form-group">
-              <label>Mô tả</label>
+              <b>Mô tả</b>
               <textarea class="form-control" name="description" rows="5"><?= $cate['description']?></textarea>
             </div>
             <div class="text-center">
@@ -71,6 +71,12 @@ if(!$cate){
         </div>
       </div>
     </section>
+    <style type="text/css">
+        label{
+          height: auto; background: #FFCCCC; color: black; border: 1px red solid; width: auto; margin-top: 10px;
+
+          }
+      </style>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

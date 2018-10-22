@@ -29,7 +29,7 @@ if(!$product){
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Tạo sản phẩm</title>
+  <title>ShopHung | Sửa thông tin sản phẩm</title>
 
   <?php include_once $path.'_share/top_asset.php'; ?>
 
@@ -47,12 +47,12 @@ if(!$product){
     <section class="content-header">
       <h1>
         Dashboard
-        <small>Tạo sản phẩm</small>
+        <small>Sửa thông tin sản phẩm</small>
 
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?= $adminUrl?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Danh mục</li>
+        <li class="active">Quản lí sản phẩm</li>
       </ol>
     </section>
 
@@ -66,23 +66,29 @@ if(!$product){
             <input type="hidden" name="old_filename" value="<?= $product['image'] ?>">
             <br>
             <div class="form-group">
-              <label>Tên sản phẩm</label>
+              <b>Tên sản phẩm</b>
               <input type="text" name="product_name" class="form-control" value="<?= $product['product_name']?>">
             </div>
-                    <span>
                 <!-- /.error -->
+              <span>
               <i>
                 <?php 
               if(isset($_GET['errName']) && $_GET['errName'] != ""){
                ?>
-               <span class="text-danger">( Cảnh báo: <?= $_GET['errName'] ?>)</span>
+               <label class="text-danger"> <?= $_GET['errName'] ?></span>
               <?php } 
               ?>
               </i>
               </span>
+              <style type="text/css">
+                label{
+                  height: auto; background: #FFCCCC; color: black; border: 1px red solid; width: auto; margin-top: 10px;
+
+                  }
+      </style>
             <!-- Danh mục -->
             <div class="form-group">
-                <label>Danh mục</label>
+                <b>Danh mục</b>
                   <select name="cate_id" class="form-control">
                     <option>---</option>
                     <?php foreach ($cate as $c) : ?>
@@ -95,12 +101,32 @@ if(!$product){
             <!-- Mô tả -->
            
             <div class="form-group">
-              <label>Giá</label>
+              <b>Giá</b>
               <input type="text" name="list_price" class="form-control" value="<?= $product['list_price']?>">
             </div>
+            <span>
+              <i>
+                <?php 
+              if(isset($_GET['list_price']) && $_GET['list_price'] != ""){
+               ?>
+               <label class="text-danger"> <?= $_GET['list_price'] ?></span>
+              <?php } 
+              ?>
+              </i>
+              </span>
             <div class="form-group">
-              <label>Giá KM</label>
+              <b>Giá KM</b>
               <input type="text" name="sell_price" class="form-control" value="<?= $product['sell_price']?>">
+              <span>
+              <i>
+                <?php 
+              if(isset($_GET['sell_price']) && $_GET['sell_price'] != ""){
+               ?>
+               <label class="text-danger"> <?= $_GET['sell_price'] ?></span>
+              <?php } 
+              ?>
+              </i>
+              </span>
             </div>       
         </div>
         <div class="col-md-6">
@@ -113,14 +139,14 @@ if(!$product){
 
           </div>
           <div class="form-group">
-            <label>Ảnh sản phẩm</label>
+            <b>Ảnh sản phẩm</b>
             <input id="product_image" type="file" name="image" class="form-control">
           </div>
         </div>
 
         <div class="col-md-12">
            <div class="form-group">
-              <label>Mô tả</label>
+              <b>Mô tả</b>
               <textarea id="editor" class="form-control" name="detail" rows="8">
                 <?= $product['detail']?>
                   
@@ -130,7 +156,7 @@ if(!$product){
         <div class="col-md-12">
           <div class="text-center">
               <a href="<?= $adminUrl?>san-pham" class="btn btn-danger btn-xs">Huỷ</a>
-              <button type="submit" class="btn btn-primary btn-xs">Tạo mới</button>
+              <button type="submit" class="btn btn-primary btn-xs">Thay đổi</button>
             </div>
         </div>
 

@@ -74,9 +74,16 @@ include './_share/client_assets.php';
     <!-- phan trang -->
 </div>
 <br>
-
-  <!-- Footer -->
-  <!-- Footer -->
+<div id="partner">
+    <div class="container">
+      <div class="tt">
+        <h2 class="title-product">Các đối tác</h2>
+      </div>
+      <?php 
+        include './_share/brand.php';
+       ?>
+    </div>
+  </div><br>
 <?php
 include './_share/footer.php';
 ?>

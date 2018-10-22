@@ -69,8 +69,8 @@ $countcomment = $stmt->fetch();
                 <table class="table table-bordered bo" > 
                   <body>
                   <tr class="bo">
-                    <th style="width: auto;">Email</th>
-                    <th style="width: auto;">Phản Hồi</th>
+                    <th style="width: 120px;">Email</th>
+                    <th style="width: 800px;">Phản Hồi</th>
                     <th style="width: 150px;">Tên Sản Phẩm</th>
                     <th >Khác</th>
                   </tr>

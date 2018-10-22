@@ -40,12 +40,11 @@ $stmt->execute();
  <style type="text/css">
 #tt{
 		overflow: scroll;
-    	height: auto;
     	height: 250px;
 		}	
 #cm{
     overflow: scroll;
-    max-height: 210px;
+    max-height: 210px; 
     margin-top: 45px; 
     margin-bottom: 50px;
     border: #ccc 1px solid;
@@ -71,7 +70,7 @@ label{
 	<div id="product">
 		<div class="container">
 			<div class="tittle-product">
-				<center><h1>Thông tin sản phẩm</h1></center>
+				<center><h1>Thông Tin Sản Phẩm</h1></center>
 				<?php foreach ($newProducts as $tt ): ?>
 					<div class="col-md-6 left" style="margin-top: 12px;">
 						<div class="anh"><center><img src="<?= $tt['image'] ?>"></center></div>
@@ -144,9 +143,9 @@ label{
 				<center><h2>Các phản hồi trước</h2></center>
 				<div class="col-md-6" id="cm">
 				<?php foreach ($comments as $c): ?>
-						<div style="max-width: 500px; height: auto;">
-							<div style="border: 1px solid black; background:MintCream ; width: 100%; float: left;  max-height: all; margin-bottom:20px">
-								<b style="font-size: 20; margin-left: 5PX;"><?= $c['email']?> </b>:
+						<div style="width: 100%; height: auto;">
+							<div style="border: 1px solid black; background:MintCream ; width:100%; float: left;  height: auto; margin-bottom:20px">
+								<b style="font-size: 20; margin-left: 5PX;"><?= $c['email']?></b>:
 								<span style="font-size: 20; margin-left: 5PX;"> <?= $c['content']?></span>
 							</div>
 						</div>		
@@ -155,22 +154,20 @@ label{
 			</div>
 		</div>
 	</div>
-	<div>
-		<center><h1>Các sản phẩm liên quan</h1></center><hr>
-		<div>
-			
-		</div>
-	</div>
+<!-- sản phẩm liên quan -->
+	<?php 
+        include './_share/splq.php';
+       ?><br>
 	<div id="partner">
-		<div class="container">
-			<h2 class="title-product">Các đối tác</h2>
-			<?php foreach ($newBrands as $dt ): ?>
-				<div class="partner-img col-md-3 col-xs-6">
-					<img src="<?= $siteUrl . $dt['image']?>" alt="">
-				</div>
-			<?php endforeach ?>
-		</div>
-	</div>
+    <div class="container">
+      <div class="tt">
+        <h2 class="title-product">Các đối tác</h2>
+      </div>
+      <?php 
+        include './_share/brand.php';
+       ?>
+    </div>
+  </div><br>
 	<?php 
 	include './_share/footer.php';
 	 ?>

@@ -15,6 +15,22 @@ $img = $_FILES['image'];
 $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
 $filename = 'img/products/'.uniqid() . '.' . $ext;
 move_uploaded_file($img['tmp_name'], '../../'.$filename);
+
+if(!$product_name){
+	header('location: ' . $adminUrl . 'san-pham/add.php?errName=Vui lòng nhập tên sản phẩm');
+	die;
+}
+$sql=" SELECT * FROM `products`";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$cate = $stmt->fetchAll();
+foreach ($cate as $c) {
+	if (strtolower($product_name) == strtolower($c['product_name'])) {
+		header('location: ' . $adminUrl . 'san-pham/add.php?errName=Trùng tên sản phẩm cũ!!!');
+	die;
+	}
+}
+
 $sql = "insert into products
 			(product_name, 
 			cate_id, 

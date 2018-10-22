@@ -1,6 +1,6 @@
-<?php 
+<?php  
 session_start();
-$path = "../";
+$path = "../"; 
 require_once $path.$path."commons/utils.php";
 checkLogin(USER_ROLES['moderator']);
 $userId = $_GET['id'];
@@ -54,7 +54,7 @@ if(!$user){
        <div class="row">
         <div class="col-md-8">
           <form action="<?= $adminUrl ?>thong-tin/save-edit.php" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?= $user['id']?>">
+            <input type="hidden" name="id" value="<?= $userId?>">
             <div class="form-group">
               <b>Logo</b>
               <input type="hidden" name="old_filename" value="<?= $user['logo'] ?>">

@@ -26,7 +26,9 @@ $newBrands = $stmt->fetchAll();
 <div id="content">
 	<div class="container">
 		<div class="col-md-6 left">
-			<h2 class="title-product">Liện hệ với chúng tôi</h2>
+            <div style="background: #FFFFCC; border: 1px red solid; height: 50px; margin-top: 10px; position: relative;">
+                  <h2 style="position: absolute;left: 10px ; bottom: -1px;" class="title-product">Liện hệ với chúng tôi</h2>               
+            </div><br>  
 			<form action="submit_contact.php" method="post" id="vali">
 				<div>
 					<b>Tên khách hàng</b>
@@ -57,7 +59,9 @@ $newBrands = $stmt->fetchAll();
 			</style>
 		</div>
 		<div class="col-md-6 right">
-                <center><h2>Địa chỉ của chúng tôi</h2></center>
+                <div style="background: #FFFFCC; border: 1px red solid; height: 50px; margin-top: 10px; position: relative;">
+                  <h2 style="position: absolute;left: 10px ; bottom: -1px;" class="title-product">Địa chỉ của chúng tôi</h2>               
+                 </div><br> 
                <iframe style="margin-top: 10px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.8276297077555!2d105.80170781486915!3d21.039581885992526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab3e6416efc7%3A0x808741175914b86b!2zMTUgxJDDtG5nIFF1YW4sIFF1YW4gSG9hLCBD4bqndSBHaeG6pXksIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1537678713724" width="100%" height="430" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
 	</div>
@@ -66,13 +70,11 @@ $newBrands = $stmt->fetchAll();
             <div class="tt">
                 <h2 class="title-product">Các đối tác</h2>
             </div>
-            <?php foreach ($newBrands as $dt ): ?>
-                <div class="partner-img col-md-3 col-xs-6">
-                    <img src="<?= $siteUrl . $dt['image']?>" alt="">
-                </div>
-            <?php endforeach ?>
+            <?php 
+                include './_share/brand.php';
+             ?>
         </div>
-    </div>
+    </div><br>
 </div>
  <?php 
     include './_share/footer.php';

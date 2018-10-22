@@ -45,7 +45,6 @@ $newBrands = $stmt->fetchAll();
 	<?php 
 	include './_share/client_assets.php';
 	 ?>
-
 	<title>Danh mục <?= $cate['name']?></title>
 	<link rel="stylesheet" type="text/css" href="plugins/simplePagination/simplePagination.css">
   <script src="plugins/simplePagination/jquery.simplePagination.js" type="text/javascript"></script>
@@ -58,8 +57,11 @@ $newBrands = $stmt->fetchAll();
 	<div id="product">
 		<div class="container">
 			<div class="tittle-product">
-				<h2>Danh mục: <?= $cate['name']?></h2>
+				<div class="hh">
+					<h2 style="position: absolute; top: -13px; left: 10px; color: #333">Danh mục: <?= $cate['name']?></h2>
+				</div>
 			</div>
+			<style type="text/css"> .hh{width: 100%; height: 50px; background: #FFFFCC; border: 1px red solid; margin-bottom: 10px; position: relative; margin-top: 10px;}</style>
 			<div class="row">
 				<?php foreach ($products as $np): ?>
 					<div class="col-sm-4 col-xs-12">
@@ -91,17 +93,15 @@ $newBrands = $stmt->fetchAll();
 		</div>
 	</div>
 	<div id="partner">
-		<div class="container">
-			<div class="tt">
-				<h2 class="title-product">Các đối tác</h2>
-			</div>
-			<?php foreach ($newBrands as $dt ): ?>
-				<div class="partner-img col-md-3 col-xs-6">
-					<img src="<?= $siteUrl . $dt['image']?>" alt="">
-				</div>
-			<?php endforeach ?>
-		</div>
-	</div>
+    <div class="container">
+      <div class="tt">
+        <h2 class="title-product">Các đối tác</h2>
+      </div>
+      <?php 
+        include './_share/brand.php';
+       ?>
+    </div>
+  </div><br>
 	<?php 
 	include './_share/footer.php';
 	 ?>

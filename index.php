@@ -26,14 +26,14 @@ $stmt->execute();
 
 $mostViewsProducts = $stmt->fetchAll();
 // lay du lieu tu csdl bang doi tac
-$newBrandsQuery = "	select * 
-						from ".TABLE_BRANDS." 
-						order by id desc limit 4
-						";
-$stmt = $conn->prepare($newBrandsQuery);
-$stmt->execute();
+// $newBrandsQuery = "	select * 
+// 						from ".TABLE_BRANDS." 
+// 						order by id desc limit 4
+// 						";
+// $stmt = $conn->prepare($newBrandsQuery);
+// $stmt->execute();
 
-$newBrands = $stmt->fetchAll();
+// $newBrands = $stmt->fetchAll();
 
 ?>
 
@@ -99,7 +99,7 @@ $newBrands = $stmt->fetchAll();
 					<h2>Sản phẩm bán chạy</h2>
 				</div>
 			</div>
-
+			<style type="text/css"> .tt1{width: 100%;}</style>
 			<?php foreach ($mostViewsProducts as $np): ?>
 				<div class="col-sm-4 col-xs-12">
 					<div class="img-height">
@@ -127,17 +127,15 @@ $newBrands = $stmt->fetchAll();
        		</div>
 	</div>
 	<div id="partner">
-		<div class="container">
-			<div class="tt">
-				<h2 class="title-product">Các đối tác</h2>
-			</div>
-			<?php foreach ($newBrands as $dt ): ?>
-				<div class="partner-img col-md-3 col-xs-6">
-					<img src="<?= $siteUrl . $dt['image']?>" alt="">
-				</div>
-			<?php endforeach ?>
-		</div>
-	</div>
+    <div class="container">
+      <div class="tt">
+        <h2 class="title-product">Các đối tác</h2>
+      </div>
+      <?php 
+        include './_share/brand.php';
+       ?>
+    </div>
+  </div><br>
 	<?php 
 	include './_share/footer.php';
 	 ?>

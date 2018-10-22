@@ -20,9 +20,7 @@ $stmt->bindParam(":phone", $phone);
 $stmt->bindParam(":nd", $nd);
 $stmt->execute();
  ?>
-<div style="width: 100%; height: 40px; background: #000; color: white;">
-	  <center><H1>Đã gửi!</H1></center>
-</div>
+echo "<script>alert('Đã gửi'); location.href='contact.php'</script>";
  <script type="text/javascript">
  	setTimeout(function(){
  		window.location.href = '<?= $siteUrl ?>';

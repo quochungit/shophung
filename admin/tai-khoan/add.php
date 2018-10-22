@@ -6,7 +6,7 @@ require_once $path.$path."commons/utils.php";
 checkLogin(USER_ROLES['admin']);
  ?>
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,26 +39,32 @@ checkLogin(USER_ROLES['admin']);
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <form action="<?= $adminUrl?>/tai-khoan/save-add.php" method="post" >
+        <form action="<?= $adminUrl?>/tai-khoan/save-add.php" method="post" id="vali">
           <div class="col-md-6">
             <div class="form-group">
-              <label>Email</label>
+              <b>Email</b>
+              <?php 
+              if(isset($_GET['msg2']) && $_GET['msg2'] != ""){
+               ?>
+               <span class="text-danger"> | <?= $_GET['msg2'] ?></span>
+              <?php } 
+              ?>
               <input type="text" name="email" class="form-control" required>
             </div>
             <div class="form-group">
-              <label>Tên đầy đủ</label>
+              <b>Tên đầy đủ</b>
               <input type="text" name="fullname" class="form-control" required>
             </div>
             <div class="form-group">
-              <label>Mật khẩu</label>
+              <b>Mật khẩu</b>
               <input type="password" name="password" class="form-control" required>
             </div>
             <div class="form-group">
-              <label>Xác nhận mật khẩu</label>
+              <b>Xác nhận mật khẩu</b>
               <input type="password" name="cfPassword" class="form-control" required>
             </div>
             <div class="form-group">
-              <label>Quyền</label>
+              <b>Quyền</b>
               <select name="role" class="form-control">
                 <?php foreach (USER_ROLES as $key => $value): ?>
                   <option value="<?= $value ?>"><?= $key ?></option>
@@ -66,7 +72,7 @@ checkLogin(USER_ROLES['admin']);
               </select>
             </div>
             <div class="form-group">
-              <label>Số điện thoại</label>
+              <b>Số điện thoại</b>
               <input type="text" name="phone_number" class="form-control" required>
             </div>
             <div class="col-md-12 text-right">
@@ -77,6 +83,12 @@ checkLogin(USER_ROLES['admin']);
         </form>
       </div>
     </section>
+    <style type="text/css">
+      label{
+          height: auto; background: #FFCCCC; color: black; border: 1px red solid; width: auto; margin-top: 10px;
+
+          }
+    </style>
     <!-- /.content -->
   </div>
   <?php include_once $path.'_share/footer.php'; ?>  
@@ -110,4 +122,48 @@ checkLogin(USER_ROLES['admin']);
   }
 </script>
 </body>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script>
+  $("#vali").validate({
+            rules: {
+              phone_number:{
+                    required: true,
+                    minlength: 10
+                },
+                fullname: "required",
+                email: {
+                    required: true,
+                    minlength: 1
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                },
+                cfPassword: {
+                    required: true,
+                    minlength: 5
+                }
+            },
+            messages: {
+              phone_number: {
+                            required: "Vui lòng nhập số điện thoại",
+                            minlength: "Mời nhập SĐT, ít nhất 10 chữ số"
+                        },
+                fullname: "Vui lòng nhập tên",
+                email:{
+                    required: "Vui lòng nhập email",
+                   
+                },  
+                password: {
+                    required: "Vui lòng nhập password",
+                    minlength: "Ít nhất 5 ký tự"
+                },
+                cfPassword: {
+                    required: "Xác nhận password",
+                    minlength: "Không khớp"
+                }
+            }
+        });
+</script>
 </html>

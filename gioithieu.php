@@ -76,25 +76,15 @@ Nếu bạn đang quan tâm đến những mẫu quần áo thể thao để nh�
         </div>
     </div>
     <div id="partner">
-        <div class="container">
-            <div class="tt">
-                <h2 class="title-product">Các đối tác</h2>
-            </div>
-            
-            <div class="partner-img col-md-3 col-xs-6">
-                <img src="img/just.png" alt="">
-            </div>
-            <div class="partner-img col-md-3 col-xs-6">
-                <img src="img/35.jpg" alt="">
-            </div>
-            <div class="partner-img col-md-3 col-xs-6">
-                <img src="img/37.jpg" alt="">
-            </div>
-            <div class="partner-img col-md-3 col-xs-6">
-                <img src="img/36.png" alt="">
-            </div>
-        </div>
+    <div class="container">
+      <div class="tt">
+        <h2 class="title-product">Các đối tác</h2>
+      </div>
+      <?php 
+        include './_share/brand.php';
+       ?>
     </div>
+  </div><br>
     <?php 
     include './_share/footer.php';
      ?>

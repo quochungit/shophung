@@ -46,7 +46,7 @@ checkLogin(USER_ROLES['moderator']);
               <div class="col-md-6 col-md-offset-3">
                 <img id="imageTarget" src="<?= $siteUrl?>img/default/default.png" class="img-responsive" required>
               </div>
-            </div>
+            </div> 
             <div class="form-group">
               <b>Ảnh đối tác</b>
               <input type="file" id="brand_image" name="image" class="form-control">

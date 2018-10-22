@@ -12,9 +12,20 @@ $fullname = $_POST['fullname'];
 $password = $_POST['password'];
 $cfPassword = $_POST['cfPassword'];
 $role = $_POST['role'];
-if($password != $cfPassword){
-	header('location: ' . $adminUrl . 'tai-khoan/add.php?msg=Xác nhận mật khẩu không đúng!');
+
+$sql = "select * from users";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$us = $stmt->fetchAll();
+foreach ($us as $u) {
+	if ($email == $u['email']) {
+		header('location: ' . $adminUrl . 'tai-khoan/add.php?msg2=Email đã được sử dụng!');
 	die;
+	}
+	}
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  		header('location: ' . $adminUrl . 'tai-khoan/add.php?msg2=Mời nhập email!');
+	die; 
 }
 // email xem có tồn tại không
 // mật khẩu có nằm trong khoảng từ 6-20 ký tự không
@@ -31,6 +42,7 @@ $sql = "insert into users
 			:fullname, 
 			:password, 
 			:role)";
+
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(":email", $email);
 $stmt->bindParam(":phone_number", $phone_number);

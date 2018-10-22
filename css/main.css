@@ -58,6 +58,10 @@ img{
     max-width: 1100px;
     margin:auto;
 }
+#brand{
+    max-width: 1100px;
+    margin:auto;
+}
 .container-fluid{
     padding: 0px !important;
 }
@@ -67,6 +71,9 @@ img{
 }
 .carousel-inner img{
     vertical-align: middle;
+}
+.carousel-control{
+        height: auto;
 }
 .title-name{
     color: red;

@@ -26,31 +26,33 @@ var_dump($_SESSION['cart']);
 	 ?>
 	<div class="container" style="background: #FFFFCC	">
 		<div class="col-md-12"><center><h2>Giỏ hàng của bạn</h2></center></div>
-		<div class="col-md-9">
+		<div class="col-md-12">
 			<table class="table table-hover" style="margin-top: 25px;">
 				<tr>
 					<th>STT</th>
 					<th>Tên sản phẩm</th>
 					<th>Ảnh sản phẩm</th>
 					<th>Giá</th>
-					<th></th>
+					<th>Xóa</th>
 				</tr>
 				<tbody>
 					
 				</tbody>
-				<?php $stt=1; foreach ($_SESSION['cart'] as $key => $item): ?>
+				<?php $stt=1; foreach ($_SESSION['cart'] as $key => $row): ?>
 					<tr>
 						<td><?php echo $stt; ?></td>
-						<td><?php $item['product_name'] ?></td>
-						<td>
-						</td>
-						<td><?php $item['sell_price'] ?></td>
-						<td></td>
+						<td><?php $row['nameproduct'] ?></td>
+						<td><?php $row['imgproduct'] ?></td>
+						<td><?php $row['priceproduct'] ?></td>
+						<td><form action="get">
+                            <a href="del_cart.php?product_id=<?php echo $key?>"><img src="img/del.jpg" style="width:28px; height: 28px"/></a></td>
+                    </form></td>
 					</tr>
 				<?php $stt ++; endforeach ?>
 			</table>
 		</div>
-		<div class="col-md-3" style="float: right;">
+		<hr>	
+		<div class="col-md-12">
 			<center><h3>THÔNG TIN KHÁCH HÀNG</h3></center><br>
 			<form method="POST" action="giohang.php" id="vali">
 				<b>Tên khách hàng</b> 
@@ -67,16 +69,16 @@ var_dump($_SESSION['cart']);
 			</form>
 		</div>
 	</div>
-	<div id="partner">
-		<div class="container">
-			<h2 class="title-product">Các đối tác</h2>
-			<?php foreach ($newBrands as $dt ): ?>
-				<div class="partner-img col-md-3 col-xs-6">
-					<img src="<?= $siteUrl . $dt['image']?>" alt="">
-				</div>
-			<?php endforeach ?>
-		</div>
-	</div>
+	<<div id="partner">
+    <div class="container">
+      <div class="tt">
+        <h2 class="title-product">Các đối tác</h2>
+      </div>
+      <?php 
+        include './_share/brand.php';
+       ?>
+    </div>
+  </div><br>
 	<?php 
 	include './_share/footer.php';
 	 ?>

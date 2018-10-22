@@ -24,7 +24,19 @@ $filename = 'img/products/'.uniqid() . '.' . $ext;
 move_uploaded_file($img['tmp_name'], '../../'.$filename);
 
 if(!$product_name){
-	header('location: ' . $adminUrl . 'san-pham/edit.php?id='.$id.'&errName=Vui lòng nhập tên danh mục');
+	header('location: ' . $adminUrl . 'san-pham/edit.php?id='.$id.'&errName=Vui lòng nhập tên sản phẩm');
+	die;
+}
+if(!$list_price){
+	header('location: ' . $adminUrl . 'san-pham/edit.php?id='.$id.'&list_price=Vui lòng nhập giá');
+	die;
+}
+if(!$sell_price){
+	header('location: ' . $adminUrl . 'san-pham/edit.php?id='.$id.'&sell_price=Vui lòng nhập giá khuyến mãi');
+	die;
+}
+if(!$detail){
+	header('location: ' . $adminUrl . 'san-pham/edit.php?id='.$id.'&detail=Vui lòng nhập mô tả');
 	die;
 }
 

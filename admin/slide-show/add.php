@@ -41,22 +41,22 @@ checkLogin(USER_ROLES['moderator']);
     <section class="content">
       <div class="row">
         <div class="col-md-12" center>
-          <form enctype="multipart/form-data" action="<?= $adminUrl ?>slide-show/save-add.php" method="post" >
+          <form enctype="multipart/form-data" action="<?= $adminUrl ?>slide-show/save-add.php" method="post"  id="vali">
              <div class="row">
               <div class="col-md-6 col-md-offset-3">
                 <img id="imageTarget" src="<?= $siteUrl?>img/default/default.png" class="img-responsive" required>
               </div>
             </div>
             <div class="form-group">
-              <label>Ảnh</label>
+              <b>Ảnh</b>
               <input type="file" id="product_image" name="image" class="form-control">
             </div>
             <div class="form-group">
-              <label>Thông tin</label>
+              <b>Thông tin</b>
               <input class="form-control" name="tt" required></input>
             </div>
             <div class="form-group">
-               <label>Status</label>
+               <b>Status</b>
                   <select name="status">
                     <option value="1">Hiển thị</option>
                       <option value="0">Ẩn</option>
@@ -70,6 +70,12 @@ checkLogin(USER_ROLES['moderator']);
         </div>
       </div>
     </section>
+    <style type="text/css">
+       label{
+          height: auto; background: #FFCCCC; color: black; border: 1px red solid; width: auto; margin-top: 10px;
+
+          }
+    </style>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -103,4 +109,27 @@ checkLogin(USER_ROLES['moderator']);
   }
 </script>
 </body>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script>
+  $("#vali").validate({
+            rules: {
+              tt:{
+                    required: true,
+                },
+                 image: {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+                tt: "Vui lòng nhập thông tin",
+                 image: {
+                    required: "Vui lòng chọn ảnh",
+                   
+                }
+
+            }
+        });
+</script>
 </html>

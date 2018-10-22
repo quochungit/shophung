@@ -1,28 +1,17 @@
 <?php 
-// hien thi danh sach danh muc cua he thong
 session_start();
+// hien thi danh sach danh muc cua he thong
 $path = "../";
 require_once $path.$path."commons/utils.php";
-checkLogin(USER_ROLES['moderator']);
+checkLogin();
 // dem ton so record trong bang danh muc
-$sql = "select 
-			c.*, 
-			count(p.id) as totalProduct
-		from  ". TABLE_PRODUCT ." c
-		join ". TABLE_CATEGORY ." p
-		on c.id = p.cate_id
-		group by c.id";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$cates = $stmt->fetchAll();
-// dd($cates);
  ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ShopHung| Quản lý danh mục</title>
+  <title>ShopHung | Tạo danh mục</title>
 
   <?php include_once $path.'_share/top_asset.php'; ?>
 
@@ -40,26 +29,31 @@ $cates = $stmt->fetchAll();
     <section class="content-header">
       <h1>
         Dashboard
-        <small>Thêm danh mục</small>
+        <small>Tạo danh mục</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?= $adminUrl ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Thêm danh mục</li>
+        <li><a href="<?= $adminUrl?>"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Danh mục</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-6" center>
-          <form action="<?= $adminUrl ?>danh-muc/save-add.php" method="post" id="vali">
+        <div class="col-md-6">
+          <form action="<?= $adminUrl ?>danh-muc/save-add.php" method="post">
             <div class="form-group">
               <b>Tên danh mục</b>
-              <input type="text" name="name" class="form-control" required>
+              <input type="text" name="name" class="form-control">
+              <?php 
+              if(isset($_GET['errName']) && $_GET['errName'] != ""){
+               ?>
+               <label class="text-danger"><?= $_GET['errName'] ?></label>
+              <?php } ?>
             </div>
             <div class="form-group">
               <b>Mô tả</b>
-              <textarea class="form-control" name="desc" rows="5"></textarea>
+              <textarea class="form-control" name="description" rows="5"></textarea>
             </div>
             <div class="text-center">
               <a href="<?= $adminUrl?>danh-muc" class="btn btn-danger btn-xs">Huỷ</a>
@@ -69,6 +63,12 @@ $cates = $stmt->fetchAll();
         </div>
       </div>
     </section>
+    <style type="text/css">
+        label{
+          height: auto; background: #FFCCCC; color: black; border: 1px red solid; width: auto; margin-top: 10px;
+
+          }
+      </style>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -79,31 +79,4 @@ $cates = $stmt->fetchAll();
 <?php include_once $path.'_share/bottom_asset.php'; ?>  
 
 </body>
-<style type="text/css">
-  label{
-          height: auto; background: #FFCCCC; color: black; border: 1px red solid; width: auto; margin-top: 10px;
-
-          }
-</style>
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-<script>
-  $("#vali").validate({
-            rules: {
-                name: "required",
-                desc: {
-                    required: true,
-                    minlength: 2
-                }
-            },
-            messages: {
-                name: "Vui lòng nhập tên thư mục",
- 
-                desc: {
-                    required: "Vui lòng nhập ...",
-                    minlength: "Nội dung ngắn vậy?"
-                }
-            }
-        });
-</script>
 </html>

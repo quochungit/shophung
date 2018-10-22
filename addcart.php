@@ -12,13 +12,16 @@ $stmt->execute();
 $product = $stmt->fetchAll();
 //ktra nếu tồn tại giỏ hàng thì cập nhật giỏ hàng
 //ngược lại thì tạo mới
-if (! isset($_SESSION['cart'][$id])) {
-	//tạo mới giỏ hàng
-	$_SESSION['cart'][$id]['product_name']= $product['product_name'];
-	$_SESSION['cart'][$id]['image']= $product['image'];
-	$_SESSION['cart'][$id]['sell_price']= $product['sell_price'];
-	$_SESSION['cart'][$id]['qty']= 1;
-}
+ if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart']= [];
+    }
+    if (isset($_POST['btn_add'])) {
+		$id_product = $_POST['id_product'];
+        $img_product = $_POST['img_product'];
+        $name_product = $_POST['name_product'];
+        $price_product = $_POST['price_product'];
+        $_SESSION['cart'][$id_product]=['nameproduct' => $name_product, 'priceproduct'=> $price_product, 'imgproduct'=>$img_product];
+    }
 else
 {
 	//cập nhật giỏ hàng
